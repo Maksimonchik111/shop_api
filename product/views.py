@@ -34,7 +34,7 @@ def category_detail_api_view(request, id):
 
 @api_view(http_method_names=['GET'])
 def product_list_api_view(request):
-    products = Product.objects.all()
+    products = Product.objects.prefetch_related('reviews')
     data = ProductListSerializer(products, many=True).data
 
     return Response(
